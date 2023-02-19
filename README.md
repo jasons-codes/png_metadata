@@ -27,4 +27,4 @@ Requirements
 Limitations
 -------------
 * 'iTXt' editing and function to insert special cid chunk are not provided.
-  - You can implement it through [PIL.PngImagePlugin.PngInfo](https://pillow.readthedocs.io/en/stable/PIL.html#pngimageplugin-pnginfo-class) if needed.
+  - If you need that function, you can implement it through [PIL.PngImagePlugin.PngInfo](https://pillow.readthedocs.io/en/stable/PIL.html#pngimageplugin-pnginfo-class)

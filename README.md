@@ -28,3 +28,13 @@ Limitations
 -------------
 * 'iTXt' editing and function to insert special cid chunk are not provided.
   - If you need that function, you can implement it through [PIL.PngImagePlugin.PngInfo](https://pillow.readthedocs.io/en/stable/PIL.html#pngimageplugin-pnginfo-class)
+    
+<br />
+
+Why did i make this?
+-------------
+Using 'ExifTool' is very difficult. Putting the 'tEXt' chunks of PNG directly into ExifTool requires very specialized knowledge and tool skills.
+
+I couldn't find a way to properly edit 'tEXt' even in a graphics tool like GIMP.
+
+In the end, I found it easy to programmatically insert the 'tEXt' value into the PNG using the python3 + Pillow combination.

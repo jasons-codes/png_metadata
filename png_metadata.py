@@ -2,11 +2,11 @@ from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 
 
-def _write_text(metadata, args, exclude=None):
-    if not args:
+def _write_text(metadata, tags, exclude=None):
+    if not tags:
         return
 
-    for key, item in args.items():
+    for key, item in tags.items():
         if exclude and key in exclude:
             continue
 
@@ -20,18 +20,18 @@ def _write_text(metadata, args, exclude=None):
         metadata.add_text(key, value, zip=zip_)
 
 
-def add_metadata(filename, keyValues, output=None):
+def add_metadata(filename, tags, output=None):
     image = Image.open(filename)
     if not image:
         raise Exception('add_metadata: cannot open \'' + str(filename) + '\'')
 
-    if not keyValues:
-        raise Exception('add_metadata: \'keyValues\' is null or empty')
+    if not tags:
+        raise Exception('add_metadata: \'tags\' is null or empty')
 
     metadata = PngInfo()
     
     _write_text(metadata, image.text)
-    _write_text(metadata, keyValues)
+    _write_text(metadata, tags)
 
     if not output:
         output = filename
@@ -39,17 +39,17 @@ def add_metadata(filename, keyValues, output=None):
     image.save(output, pnginfo=metadata)
 
 
-def remove_metadata(filename, keys, output=None):
+def remove_metadata(filename, tags, output=None):
     image = Image.open(filename)
     if not image:
         raise Exception('remove_metadata: cannot open \'' + str(filename) + '\'')
 
-    if not keys:
-        raise Exception('remove_metadata: \'keys\' is null or empty')
+    if not tags:
+        raise Exception('remove_metadata: \'tags\' is null or empty')
 
     metadata = PngInfo()
     
-    _write_text(metadata, image.text, exclude=keys)
+    _write_text(metadata, image.text, exclude=tags)
 
     if not output:
         output = filename
@@ -203,7 +203,7 @@ if __name__ == '__main__':
         print('OUTPUT:' + str(OUTPUT))
         print('ZIP:' + str(ZIP))
 
-    if 'a' == MODE: add_metadata(filename=FILENAME, keyValues=METADATAS, output=OUTPUT)
-    elif 'r' == MODE: remove_metadata(filename=FILENAME, keys=METADATAS, output=OUTPUT)
+    if 'a' == MODE: add_metadata(filename=FILENAME, tags=METADATAS, output=OUTPUT)
+    elif 'r' == MODE: remove_metadata(filename=FILENAME, tags=METADATAS, output=OUTPUT)
     elif 'c' == MODE: clear_metadata(filename=FILENAME, output=OUTPUT)
     elif 'p' == MODE: print_metadata(filename=FILENAME)

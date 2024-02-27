@@ -82,4 +82,3 @@
 unity[[:space:]]default[[:space:]]resources filter=lfs diff=lfs merge=lfs -text
 unity_builtin_extra filter=lfs diff=lfs merge=lfs -text
 *.unitypackage filter=lfs diff=lfs merge=lfs -text
-C:/proj/modules/png_metadata/commandline.png filter=lfs diff=lfs merge=lfs -text
